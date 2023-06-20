@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Sales Forecasting</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mt-4">
+      <div class="card">
+        <div class="card-header text-center">
+          <img src="{% static 'images/logo.png' %}" alt="Sales Forecasting" style="height: 100px;">
+          <h1 class="text-info text-center mb-0"><strong>Sales Forecasting</strong></h1>
+        </div>
+        <div class="card-body">
+          <form action="" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+          {% csrf_token %}
+            <div class="form-group row">
+              <div class="col-md-8">
+                <label for="path"><strong>Enter Transactions Path</strong></label>
+                <input type="text" name="path" id="path" class="form-control" required>
+              </div>
+              <div class="col-md-4">
+                <label for="periods"><strong>Enter Desired Periods (Days)</strong></label>
+                <input type="text" name="periods" id="periods" class="form-control text-right" value="200" required>
+              </div>
+            </div>
+            <button class="btn btn-info btn-md" type="submit"><i class="fa fa-upload"></i>&nbsp;Upload File & Get Predictions</button>
+            {% if predicted == 1 %}
+            <a class="btn btn-danger btn-md" href="./"><i class="fa fa-retweet"></i>&nbsp;Reset</a>
+            {% endif %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% if predicted == 1 %}
+  <div class="row mt-3">
+    <div class="col-md-12 mb-3">
+      <div class="card">
+        <div class="card-header bg-success">
+          <h3 class="text-white text-center mb-0">Predictions in Plot</h3>
+        </div>
+        <div class="card-body text-center">
+          <img src="{% static 'plot.png' %}" alt="Predictions in Plot" style="">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 mb-5">
+      <div class="card">
+        <div class="card-header bg-success">
+          <h3 class="text-white text-center mb-0">Predictions in Charts</h3>
+        </div>
+        <div class="card-body text-center">
+          <img src="{% static 'plot_components.png' %}" alt="Predictions in Charts" style="">
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+</body>
+</html>
