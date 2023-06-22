@@ -14,17 +14,13 @@ from django.http import HttpResponse
 def index(request):
 	predicted = 0
 	if request.method == "POST":
-		path = request.POST.get("path", "")
-		periods = request.POST.get("periods", "")
-		dataframe = pd.read_csv(path)
+		dataframe = pd.read_csv(request.FILES['file'])
 		dataframe.head()
 
 		dataframe.dtypes
 
 		dataframe ['date'] = pd.to_datetime(dataframe ['date'])
 		dataframe.dtypes
-
-		dataframe.drop('store_nbr', axis=1, inplace=True)
 
 		dataframe.columns = ['ds', 'y']
 		dataframe.head()
@@ -33,7 +29,7 @@ def index(request):
 
 		model = p.fit(dataframe)
 
-		future = p.make_future_dataframe(periods=int(periods), freq='D')
+		future = p.make_future_dataframe(periods = int(request.POST.get("periods", "")), freq='D')
 		future.tail()
 
 		forecast_prediction = p.predict(future)

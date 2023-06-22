@@ -27,8 +27,8 @@
           {% csrf_token %}
             <div class="form-group row">
               <div class="col-md-8">
-                <label for="path"><strong>Enter Transactions Path</strong></label>
-                <input type="text" name="path" id="path" class="form-control" required>
+                <label for="file"><strong>Choose Your Transaction file (.CSV)</strong></label>
+                <input type="file" name="file" id="file" class="form-control" required>
               </div>
               <div class="col-md-4">
                 <label for="periods"><strong>Enter Desired Periods (Days)</strong></label>
@@ -70,6 +70,5 @@
   </div>
   {% endif %}
 </div>
-
 </body>
 </html>
